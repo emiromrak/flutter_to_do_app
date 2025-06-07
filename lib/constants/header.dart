@@ -14,10 +14,10 @@ class _HeaderState extends State<Header> {
     return Container(
           width: deviceWidth,
           height: deviceHeight/5,
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
               color: Colors.deepPurple,
               image: DecorationImage(image: AssetImage(
-                  "lib/assets/images/header.jpg"),
+                  "lib/assets/images/anaheader.png"),
                   fit: BoxFit.cover)
           ),
           child: const Column(
@@ -25,12 +25,12 @@ class _HeaderState extends State<Header> {
               Padding(
                 padding: EdgeInsets.only(top: 10),
                 child: Text("28 Nisan 2025",
-                  style: TextStyle(color: Colors.white,fontSize: 14,fontWeight: FontWeight.bold),),
+                  style: TextStyle(color: Colors.white54,fontSize: 14,fontWeight: FontWeight.bold),),
               ),
               Padding(
                 padding: EdgeInsets.only(top: 25),
                 child: Text("TO DO LIST",
-                  style: TextStyle(color: Colors.black,fontSize: 30,fontWeight: FontWeight.bold),),
+                  style: TextStyle(color: Colors.white,fontSize: 30,fontWeight: FontWeight.bold),),
               ),
             ],
           ),

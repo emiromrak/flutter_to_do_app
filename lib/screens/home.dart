@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:untitledproject/constants/color.dart';
 import 'package:untitledproject/constants/header.dart';
-import 'package:untitledproject/main.dart';
+import 'package:untitledproject/constants/task_type.dart';
+import 'package:untitledproject/model/task.dart';
 import 'package:untitledproject/screens/add_new_task.dart';
 import 'package:untitledproject/todoitem.dart';
 class HomeScreen extends StatefulWidget {
@@ -13,11 +14,41 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  @override
+  void addNewTask(Task newTask){
+    setState(() {
+      todo.add(newTask);
+    });
 
-  List<String> todo = ["Study Lessons","Run 5K","Go to Party"];
-  List<String> completed = ["Game Meetup","Take Out Trash"];
-
+  }
+List<Task> todo = [
+  Task(
+      type: TaskType.note,
+      title:"Study Lessons",
+      description: "Study COMP1",
+      isCompleted: false),
+    Task(
+        type: TaskType.contest,
+        title:"Run 5K",
+        description: "Run COMP1",
+        isCompleted: false),
+    Task(
+        type: TaskType.calender,
+        title:"Go to Party",
+        description: "Party COMP1",
+        isCompleted: false)
+  ];
+  List<Task> completed = [
+    Task(
+        type: TaskType.calender,
+        title:"Game Meetup",
+        description: "Meetup",
+        isCompleted: true),
+    Task(
+        type: TaskType.contest,
+        title:"Take Out Trash",
+        description: "trash",
+        isCompleted: true),
+  ];
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
@@ -36,13 +67,13 @@ class _HomeScreenState extends State<HomeScreen> {
                             shrinkWrap: true,
                             itemCount: todo.length,
                             itemBuilder: (context, index) {
-                              return  Todoitem(title: todo[index]);
+                              return  Todoitem(task: todo[index]);
                             })
                     )
                 ),
               ),
 
-              Padding(
+              const Padding(
                 padding: const EdgeInsets.only(left:20.0),
                 child: const Align(
                     alignment: Alignment.centerLeft,
@@ -59,14 +90,16 @@ class _HomeScreenState extends State<HomeScreen> {
                         primary: false,
                         itemCount: completed.length,
                         itemBuilder: (context,index){
-                          return Todoitem(title: completed[index]);
+                          return Todoitem(task: todo[index],);
                         }),
                   ),
                 ),
               ),
               ElevatedButton(onPressed: (){
                 Navigator.of(context).push(
-                 MaterialPageRoute(builder: (context)=>const AddNewTaskScreen()),
+                 MaterialPageRoute(builder: (context)=> AddNewTaskScreen(
+                   addNewTask: (newTask)=>addNewTask(newTask),
+                 )),
                 );
               }, child: const Text("Add a New Task",style: TextStyle(fontSize: 18),),
               ),
